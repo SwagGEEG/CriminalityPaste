@@ -1,0 +1,175 @@
+-- // Tables
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/matas3535/PoopLibrary/main/Library.lua"))() -- Could Also Save It In Your Workspace And Do loadfile("Library.lua")()
+--CHAMS = loadstring(game:HttpGet("https://raw.githubusercontent.com/SwagGEEG/RBXHub/main/Criminality/Visuals/Chams"))()
+loadfile("CrimPaste/Players.lua")()--ESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/SwagGEEG/RBXHub/main/Criminality/Visuals/ESP"))()
+loadfile("CrimPaste/Aim.lua")()
+loadfile("CrimPaste/GunMods.lua")()
+
+-- // Variables
+
+-- // Init
+local Window = Library:New({Name = "MikeHack", Accent = Color3.fromRGB(25, 240, 100)})
+--
+local Combat = Window:Page({Name = "Combat"})
+local Visuals = Window:Page({Name = "Visuals"})
+local GunMod = Window:Page({Name = "Gun Mods"})
+local Settings = Window:Page({Name = "Settings"})
+--
+local AimLock = Combat:Section({Name = "Aimlock", Side = "Left"})
+local SilentAim = Combat:Section({Name = "Silent Aim", Side = "Left"})
+local FOV = Combat:Section({Name = "FOV", Side = "Right"})
+local Aimbot_Extra = Combat:Section({Name = "Extra", Side = "Right"})
+--
+local Visuals_Players, Visuals_Chams, Visuals_Misc = Visuals:MultiSection({Sections = {"Players", "Chams", "Misc"}, Side = "Left", Size = 200})
+local Visuals_Extra = Visuals:Section({Name = "Extra", Side = "Right"})
+--
+local Modifications = GunMods:Section({Name = "Modifications", Side = "Right"})
+--
+local Settings_Main = Settings:Section({Name = "Main", Side = "Left"})
+local Settings_Extra = Settings:Section({Name = "Extra", Side = "Right"})
+-- // Aimbot
+AimLock:Toggle({Name = "Enabled", Default = false, Pointer = "AimLock_Enabled", function (Value)
+    return Aimsettings.Aimbot == Value
+end})
+AimLock:Toggle({Name = "Team Check", Default = false, Pointer = "AimLock_TeamCheck", function (Value)
+    return Aimsettings.Aimbot_TeamCheck == Value
+end})
+--AimLock:Keybind({Default = Enum.UserInputType.MouseButton2, KeybindName = "Aimbot", Mode = "Hold", Pointer = "AimLock_Bind"})
+--AimLock:Slider({Name = "Smoothness", Minimum = 1, Maximum = 30, Default = 1.5, Decimals = 0.1, Pointer = "AimLock_Smoothness"})
+--
+SilentAim:Toggle({Name = "Enabled", Pointer = "SilentAimEnabled"})
+--SilentAim:Slider({Name = "Hit Chances", Pointer = "HitChances", min = 0, max = 100, value = 100, suffix = "%", function(Value)
+--    return Aimsettings.HitChance == Value
+--end})
+--
+FOV:Toggle({Name = "Enabled", Pointer = "Circle2Enabled"})
+FOV:Toggle({Name = "Show FOV", Default = false, Pointer = "FOV_ShowFOV", function(Value)
+    return Aimsettings.Aimbot_Draw_FOV == Value
+end})
+FOV:Colorpicker({Name = "FOV Color", Default = Color3.fromRGB(200, 25, 25), Pointer = "FOV_COLOR", function (Value)
+    return Aimsettings.Aimbot_FOV_Color == Value
+end})
+FOV:Slider({Name = "FOV", Minimum = 100, Maximum = 540, Default = 100, Pointer = "FOV_FOVVALUE", function(Value)
+    return Aimsettings.Fov == Value
+    end})
+--
+Aimbot_Extra:Toggle({Name = "Visible Check", Pointer = "VisibleCheck", Default = true})
+Aimbot_Extra:Slider({Name = "Recoil", Pointer = "RecoilReductionSlider", min = 0, max = 200, value = 100, suffix = "%",
+function (Value)
+    return GunMod("all", "Recoil", Value)
+end})
+--
+
+-- // Visuals
+Visuals_Players:Toggle({Name = "Enable", Default = false, Pointer = "VisualsPlayers_Enable", function(Value)
+    return ESP.Enabled and ESP.TextOutline == Value
+end})
+Visuals_Players:Toggle({Name = "Show Team", Default = false, Pointer = "VisualsPlayers_Show Team", function (Value)
+    return ESP.ShowTeam and ESP.ShowTeamColor == Value
+end })
+Visuals_Players:Toggle({Name = "Boxes", Default = false, Pointer = "VisualsPlayers_Boxes", function(Value)
+    return ESP.ShowBoxes == Value
+end})
+Visuals_Players:Toggle({Name = "Nametags", Default = false, Pointer = "VisualsPlayers_Names", function(Value)
+    return ESP.ShowName == Value
+end})
+Visuals_Players:Toggle({Name = "Distance", Default = false, Pointer = "VisualsPlayers_Distance", function(Value)
+    return ESP.ShowDistance == Value
+end})
+Visuals_Players:Toggle({Name = "Health", Default = false, Pointer = "VisualsPlayers_Health", function(Value)
+    return ESP.ShowHealth == Value
+end})
+Visuals_Players:Toggle({Name = "Tracers", Default = false, Pointer = "VisualsPlayers_Tracers", function(Value)
+    return ESP.ShowTracers == Value
+end})
+Visuals_Players:Toggle({Name = "Head Dot", Default = false, Pointer = "VisualsPlayers_HDot", function(Value)
+    return ESP.ShowHDot == Value
+end})
+Visuals_Players:Toggle({Name = "Crosshair", Default = false, Pointer = "VisualsPlayers_Crosshair", function(Value)
+    return ESP.Crosshair == Value
+end})
+
+-- Chams
+Visuals_Chams:Toggle({Name = "Enable Chams", Pointer = "Chams_Enable", function(Value)
+    return CHAMS.Enabled == Value
+end})
+Visuals_Chams:Colorpicker({Name = "Chams Visible Color", Alpha = 0, Default = Color3.fromRGB(25, 240, 100), pointer = "ChamsVisColor", function (Value)
+    return CHAMS.VisColor == Value
+end, ALPHA = function (Alpha)
+    return CHAMS.VisTrans == Alpha
+end})
+Visuals_Chams:Toggle({Name = "XQZ Chams", Pointer = "XQZChams_Enable", function (Value)
+    return CHAMS.XQZ == Value
+end})
+Visuals_Chams:Colorpicker({Name = "Chams XQZ Color", Alpha = 0.5, Default = Color3.fromRGB(240, 25, 25), pointer = "ChamsXQZColor", function (Value)
+    return CHAMS.XQZColor == Value
+end, ALPHA = function (Alpha)
+    return CHAMS.XQZTrans == Alpha
+end})
+
+--Lootables
+Visuals_Misc:Toggle({Name = "Medium Safe", Pointer = "LootMS", function(Value)
+    ESP.mediumSafe = Value 
+end})
+Visuals_Misc:Toggle({Name = "Small Safe", Pointer = "LootSS", function(Value)
+    ESP.smallSafe = Value 
+end})
+Visuals_Misc:Toggle({Name = "Registers", Pointer = "LootR", function(Value)
+    ESP.registerSafe = Value 
+end})
+Visuals_Misc:Toggle({Name = "ATMs", Pointer = "LootATMs", function (Value)
+    return ESP.Atms == Value
+end})
+Visuals_Misc:Toggle({Name = "Dealers", Pointer = "LootDLRs", function (Value)
+    return ESP.Dealers == Value
+end})
+
+--
+Visuals_Misc:Toggle({Name = "Enabled", Default = true, Pointer = "VisualsSelf_Enabled"})
+
+--
+Visuals_Extra:Colorpicker({Name = "Team Color", Default = Color3.fromRGB(25, 200, 25), Pointer = "VisualsExtra_TeamColor", function (Value)
+    return ESP.TeamColor == Value
+end})
+Visuals_Extra:Colorpicker({Name = "Enemy Color", Default = Color3.fromRGB(25, 200, 25), Pointer = "VisualsExtra_EnemyColor", function (Value)
+    return ESP.EnemyColor == Value
+end})
+--
+Modifications:Toggle({Name = "No Recoil", Pointer = "Mod_NoRecoil", function (Value)
+    return GunMods.NoRecoil == Value
+end})
+Modifications:Toggle({Name = "Spread", Pointer = "Mod_SpreadToggle", function (Value)
+    return GunMods.Spread == Value
+end})
+Modifications:Slider({Name = "Spread", Pointer = "Mod_SpreadAmount", Default = 100, min = 0, max = 100, function (Value)
+    return GunMods.SpreadAmount == Value
+end})
+Modifications:Toggle({Name = "Instant Equip", Pointer = "Mod_InstantEquip", function (Value)
+    return GunMods.InstantEquip == Value
+end})
+Modifications:Toggle({Name = "Automatic Guns", Pointer = "Mod_AutoMode", function (Value)
+    return GunMods.AutoMode == Value
+end})
+
+-- // Settings
+Settings_Main:ConfigBox({})
+Settings_Main:ButtonHolder({Buttons = {{"Load", function() end}, {"Save", function() end}}})
+Settings_Main:Label({Name = "Unloading will fully unload\neverything, so save your\nconfig before unloading.", Middle = true})
+Settings_Main:Button({Name = "Unload", Callback = function() Window:Unload() end})
+
+Menu = Settings:Section({Name = "Menu", Side = "Right"})
+Menu:Keybind({Name = "Open / Close", Default = Enum.KeyCode.RightShift, KeybindName = "Window Key", Mode = "Toggle", Pointer = "Menu_OpenToggle",
+callback = function () Window:Fade() end})
+
+Settings_Extra:Slider({Name = "ESP Size", Default = 18, min = 12, max = 24, Pointer = "SettingsExtra_ESPSize", function (Value)
+    return ESP.TextSize == Value
+end})
+Settings_Extra:Slider({Name = "ESP Distance", Default = 25000, min = 100, max = 25000, Pointer = "SettingsExtra_ESPDistance", function (Value)
+    return ESP.MaxDistance == Value
+end})
+Settings_Extra:Slider({Name = "ESP Refresh (ms)", Default = 5, min = 1, max = 200, Pointer = "SettingsExtra_ESPRefresh", function (Value)
+    return ESP.RefreshRate == Value
+end})
+
+-- // Initialisation
+Window:Initialize()
