@@ -1,9 +1,10 @@
 -- // Tables
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/matas3535/PoopLibrary/main/Library.lua"))() -- Could Also Save It In Your Workspace And Do loadfile("Library.lua")()
 --CHAMS = loadstring(game:HttpGet("https://raw.githubusercontent.com/SwagGEEG/RBXHub/main/Criminality/Visuals/Chams"))()
-loadfile("CrimPaste/Players.lua")()--ESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/SwagGEEG/RBXHub/main/Criminality/Visuals/ESP"))()
-loadfile("CrimPaste/Aim.lua")()
-loadfile("CrimPaste/GunMods.lua")()
+--ESP = loadstring(game:HttpGet("https://raw.githubusercontent.com/SwagGEEG/RBXHub/main/Criminality/Visuals/ESP"))()
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/SwagGEEG/CriminalityPaste/main/Criminality/ESP/Players"))()--loadfile("!Players.lua")() -- Player ESP
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/SwagGEEG/CriminalityPaste/main/Criminality/Aim/Aim"))()--loadfile("!Aim.lua")() -- Aim
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/SwagGEEG/CriminalityPaste/main/Criminality/Misc/GunMods"))()--loadfile("!GunMods.lua")() -- Gun Mods :isis:
 
 -- // Variables
 
